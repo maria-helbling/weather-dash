@@ -55,10 +55,10 @@ let getForecast = () => {
     }).then(function (response) {
         for (i = 0; i < 5; i++) {
             //cardDiv and cardSection are Foundation elements to make the cards show properly
-            let cardDiv = $('<div class="cell medium-auto">')
+            let cardDiv = $('<div class="cell large-auto">')
             let card = $('<div class="card forecast">');
             cardDiv.append(card)
-            card.append($('<h4 class="card-divider">').text(moment.unix(response.daily[i].dt).format("MM/DD/YYYY")));
+            card.append($('<h4 class="h5 card-divider">').text(moment.unix(response.daily[i].dt).format("MM/DD/YYYY")));
             let cardSection = $('<div class="card-section">')
             card.append(cardSection)
             cardSection.append($(`<img src="http://openweathermap.org/img/w/${response.daily[i].weather[0].icon}.png">`));
@@ -76,16 +76,24 @@ let getCurrent = (cityName) => {
         url: urlKey,
         method: 'GET'
     }).then(function (response) {
+        //grab latitude and longitude for UV and forecast URLs
         lat = response.coord.lat;
         lon = response.coord.lon;
-        let cityTitle = $('<h2>').text(`${cityName} (${moment().format('MM')}/${moment().format('DD')}/${moment().format('YYYY')})`);
+        //add title with name and date
+        let cityTitle = $('<div class="cell shrink">')
+        let cityH2 = $('<h2>').text(`${cityName} (${moment().format('MM')}/${moment().format('DD')}/${moment().format('YYYY')})`);
+        cityTitle.append(cityH2)
         $('#current-weather').append(cityTitle);
+        //add weather icon
         let icon = $(`<img src="http://openweathermap.org/img/w/${response.weather[0].icon}.png">`);
         $('#current-weather').append(icon);
+        //add weather data
         $('#current-weather').append($('<div class="cell">').text(`Temperature: ${response.main.temp} \xB0F`));
         $('#current-weather').append($('<div class="cell">').text(`Humidity: ${response.main.humidity}%`));
         $('#current-weather').append($('<div class="cell">').text(`Wind speed: ${response.wind.speed} MPH`));
+        //get UV index
         getUv();
+        //get forecast data
         getForecast();    
     })
 

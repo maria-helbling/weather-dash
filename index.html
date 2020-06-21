@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <header class="top-bar">
+    <header class="top-bar align-center">
         <h1>Your Personal Weather Channel</h1>
     </header>
     <main class="grid-container fluid grid-margin-y">
@@ -39,14 +39,15 @@
             <!-- results area -->
             <div class="cell medium-9">
                 <!-- current weather div -->
-                <div class="grid-x" id="current-weather"></div>
+                <div class="grid-x grid-padding-x" id="current-weather"></div>
                 <!-- five day forecast -->
-                <div class="grid-x grid-padding-x">
+                <div class="grid-x grid-padding-x align-bottom" id="forecastGrid">
                     <div class="cell">
+                        <br>
                         <h3>5-Day Forecast:</h2>
                     </div>
                 </div>
-                <div class="grid-x grid-padding-x card-section" id="forecast"></div>
+                <div class="grid-x grid-padding-x card-section align-center small-up-2 medium-up-3" id="forecast"></div>
             </div>
 
         </div>
