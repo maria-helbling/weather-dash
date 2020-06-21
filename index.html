@@ -27,13 +27,14 @@
                         <!-- search bar -->
                         <input type="text" class="input-group-field" id="city-search" name="city-search" placeholder="City search">
                         <div class="input-group-button">
-                            <input id="search" class="button hollow" type="submit" value="Search">
+                            <input id="search" class="button" type="submit" value="Search">
                         </div>
                     </div>
                 </div>
-                <div class="grid-x grid-padding-y">
+                <div class="grid-x">
                     <!-- past search results -->
                     <div class="cell" id="past-searches"></div>
+                    <div class="cell" id="clear"></div>
                 </div>
             </div>
             <!-- results area -->
@@ -42,9 +43,8 @@
                 <div class="grid-x grid-padding-x" id="current-weather"></div>
                 <!-- five day forecast -->
                 <div class="grid-x grid-padding-x align-bottom" id="forecastGrid">
-                    <div class="cell">
+                    <div class="cell" id="forecast-title">
                         <br>
-                        <h3>5-Day Forecast:</h2>
                     </div>
                 </div>
                 <div class="grid-x grid-padding-x card-section align-center small-up-2 medium-up-3" id="forecast"></div>

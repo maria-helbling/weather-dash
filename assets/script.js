@@ -11,10 +11,12 @@ let storedCities = [];
 //put past searches on the page
 let renderHistory = () => {
     $('#past-searches').empty();
+    $('#clear').empty();
     storedCities.forEach((value) => {
-        let nameBtn = $(`<button class="history hollow button expanded secondary" type="button" data-name="${value}">`).text(value);
+        let nameBtn = $(`<button class="history button expanded" type="button" data-name="${value}">`).text(value);
         $('#past-searches').append(nameBtn);
     })
+    if (storedCities.length) {$('#clear').append($(`<button class="button hollow expanded history-clear" type="button">`).text(`Clear search history`))}
 }
 
 //write new name into local storage
@@ -53,6 +55,8 @@ let getForecast = () => {
         url: urlKey,
         method: 'GET'
     }).then(function (response) {
+            $('#forecast-title').append($('<br>'))
+            $('#forecast-title').append($('<h3>').text(`5-Day Forecast:`))
         for (i = 0; i < 5; i++) {
             //cardDiv and cardSection are Foundation elements to make the cards show properly
             let cardDiv = $('<div class="cell large-auto">')
@@ -113,6 +117,7 @@ $('#search').click((event) => {
     $('#city-search').val('');
     if (inputCity) {
         $('#current-weather').empty();
+        $('#forecast-title').empty();
         $('#forecast').empty();
         getCurrent(inputCity);
         storeSearches(inputCity);
@@ -123,6 +128,14 @@ $('#search').click((event) => {
 $(document).on("click", ".history", function () {
     let chosenCity = $(this).attr('data-name')
     $('#current-weather').empty();
+    $('#forecast-title').empty();
     $('#forecast').empty();
     getCurrent(chosenCity);
+})
+
+//Listen to clear search history button
+$(document).on("click", ".history-clear", function () {
+    $('#past-searches').empty();
+    storedCities = [];
+    localStorage.setItem('cityHistory', JSON.stringify(storedCities));
 })
