@@ -30,6 +30,11 @@ let storeSearches = (newCity) => {
     localStorage.setItem('cityHistory', JSON.stringify(storedCities))
 }
 
+//if there is no data to display
+let noData = () => {
+    $('#current-weather').append($('<img src="assets/images/clouds.jpg" alt="no data found filler picture">'))   
+}
+
 //get UV data
 let getUv = () => {
     let urlKey = `http://api.openweathermap.org/data/2.5/uvi?appid=19b6b8e66066ceceeddf41a7b1b7f8b3&lat=${lat}&lon=${lon}`
@@ -83,6 +88,8 @@ let getCurrent = (cityName) => {
         //grab latitude and longitude for UV and forecast URLs
         lat = response.coord.lat;
         lon = response.coord.lon;
+        //reset field
+        $('#current-weather').empty();
         //add title with name and date
         let cityTitle = $('<div class="cell shrink">')
         let cityH2 = $('<h2>').text(`${cityName} (${moment().format('MM')}/${moment().format('DD')}/${moment().format('YYYY')})`);
@@ -104,7 +111,8 @@ let getCurrent = (cityName) => {
 }
 
 //render past searches and the last searched city weather info
-if (localStorage.getItem('cityHistory')) {
+storedCities = JSON.parse(localStorage.getItem('cityHistory'))
+if (storedCities.length) {
     storedCities = JSON.parse(localStorage.getItem('cityHistory'))
     renderHistory();
     getCurrent(storedCities[0]);
@@ -119,6 +127,7 @@ $('#search').click((event) => {
         $('#current-weather').empty();
         $('#forecast-title').empty();
         $('#forecast').empty();
+        noData();
         getCurrent(inputCity);
         storeSearches(inputCity);
     }
@@ -130,6 +139,7 @@ $(document).on("click", ".history", function () {
     $('#current-weather').empty();
     $('#forecast-title').empty();
     $('#forecast').empty();
+    noData();
     getCurrent(chosenCity);
 })
 
@@ -139,3 +149,6 @@ $(document).on("click", ".history-clear", function () {
     storedCities = [];
     localStorage.setItem('cityHistory', JSON.stringify(storedCities));
 })
+
+
+

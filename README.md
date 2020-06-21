@@ -1,8 +1,11 @@
 # Weather dashboard
 
 A weather dashboard that runs in the browser and features dynamically updated HTML and CSS.
+The live version can be [found here](https://maria-helbling.github.io/weather-dash/).
 
-Use the [OpenWeather API](https://openweathermap.org/api) to retrieve weather data for cities. The documentation includes a section called "How to start" that will provide basic setup and usage instructions. Use `localStorage` to store any persistent data.
+The dashboard is on one page and visible here:
+
+![screenshot of dashboard](assets/images/screenshot.PNG)
 
 ## User Story
 
@@ -31,21 +34,18 @@ THEN I am presented with the last searched city forecast
 ```
 ## Build
 
-* The site is built using Bootstrap.
-   * The use of Bootstrap minimises the need for media queries for responsiveness.
-   * See [Bootstrap documentation](https://getbootstrap.com/docs/4.5/getting-started/introduction/) for customising the site with their provided options
-* FontAwesome is used for save key images. [Read more about fontAwesome use and installation here.](https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use)
-* [OpenWeather API](https://openweathermap.org/api) is used to retrieve weather data for cities. 
-
-### Future plans
-
--[ ] 
+* The site is built using Foundation.
+   * The use of Foundation XY grid minimises the need for media queries for responsiveness.
+   * See [Foundation documentation](https://get.foundation/sites/docs/) for customising the site with their provided options.
+* jQuery powers the dynamic HTML and CSS behind the scenes.
+* [OpenWeather API](https://openweathermap.org/api) is used to retrieve current and forecast weather data for cities. 
+* The dashboard utilises local storage to record search history.
 
 ## Setup
 
 To clone the repo:
 ```
-git clone https://github.com/maria-helbling/dayplanner.git
+git clone https://github.com/maria-helbling/weather-dash.git
 ``` 
 
 ## Credits
@@ -69,6 +69,3 @@ Here are the steps needed for doing that:
 
 Following a code review, your feature will be merged.
 
-The following image demonstrates the application functionality:
-
-![weather dashboard demo](./Assets/06-server-side-apis-homework-demo.png)

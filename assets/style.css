@@ -1,8 +1,10 @@
 
 /* #191970 midnight blue */
 body {
-    background-image: linear-gradient(lightskyblue,lightskyblue, #2199e8);
-    height: 100vh;
+    background: linear-gradient(to bottom, lightskyblue,lightskyblue, #2199e8);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
 }
 
 .card {
