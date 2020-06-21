@@ -1,30 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Compressed Foundation CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
+        integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
     <!-- CSS -->
     <link rel="stylesheet" href="assets/style.css">
     <title>Document</title>
 </head>
-<body>
-    <h1>Your Personal Weather Channel</h1>
-    <!-- search bar -->
-    <input type="text" id="city-search" name="city-search" placeholder="City search"><br>
-    <input id="search" type="submit" value="Search">
-    <!-- past search results -->
-    <div id="past-searches"></div>
-    <!-- current weather div -->
-    <div id="current-weather"></div>
-    <!-- five day forecast -->
-    <div id="forecast">
-        <h2>5-Day Forecast:</h2>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
+<body>
+    <header class="top-bar">
+        <h1>Your Personal Weather Channel</h1>
+    </header>
+    <main class="grid-container fluid grid-margin-y">
+        <div class="grid-x grid-margin-x grid-padding-y grid-margin-y">
+            <!-- search area -->
+            <div class="cell medium-3">
+                <div class="grid-x">
+                    <div class="cell input-group">
+                        <!-- search bar -->
+                        <input type="text" class="input-group-field" id="city-search" name="city-search" placeholder="City search">
+                        <div class="input-group-button">
+                            <input id="search" class="button hollow" type="submit" value="Search">
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-x grid-padding-y">
+                    <!-- past search results -->
+                    <div class="cell" id="past-searches"></div>
+                </div>
+            </div>
+            <!-- results area -->
+            <div class="cell medium-9">
+                <!-- current weather div -->
+                <div class="grid-x" id="current-weather"></div>
+                <!-- five day forecast -->
+                <div class="grid-x grid-padding-x">
+                    <div class="cell">
+                        <h3>5-Day Forecast:</h2>
+                    </div>
+                </div>
+                <div class="grid-x grid-padding-x card-section" id="forecast"></div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <!-- Compressed Foundation JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
+        integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+    <!-- my js -->
     <script src="assets/script.js"></script>
 
 </body>
+
 </html>

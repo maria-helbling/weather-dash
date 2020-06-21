@@ -12,7 +12,7 @@ let storedCities = [];
 let renderHistory = () => {
     $('#past-searches').empty();
     storedCities.forEach((value) => {
-        let nameBtn = $(`<button class="history" data-name="${value}">`).text(value);
+        let nameBtn = $(`<button class="history hollow button expanded secondary" type="button" data-name="${value}">`).text(value);
         $('#past-searches').append(nameBtn);
     })
 }
@@ -35,10 +35,9 @@ let getUv = () => {
         url: urlKey,
         method: 'GET'
     }).then(function (response) {
-        $('#current-weather').append($('<div id="index-div">').text(`UV Index:`));
-        $('#index-div').css('display', 'inline-block')
-        let uvValueDiv = $(`<div id="index">`).text(response.value)
-        $('#index-div').append(uvValueDiv);
+        $('#current-weather').append($('<div class="cell shrink" id="index-div">').text(`UV Index:`));
+        let uvValueDiv = $(`<div class="cell shrink" id="index">`).text(response.value)
+        $('#current-weather').append(uvValueDiv);
         //background color based on threat level
         if (Math.floor(response.value) < 11) {
             uvValueDiv.css('background-color', uvLevels[Math.floor(response.value)])
@@ -55,12 +54,17 @@ let getForecast = () => {
         method: 'GET'
     }).then(function (response) {
         for (i = 0; i < 5; i++) {
-            let card = $('<div>').css('display', 'inline-block');
-            card.append($('<h2>').text(moment.unix(response.daily[i].dt).format("MM/DD/YYYY")));
-            card.append($(`<img src="http://openweathermap.org/img/w/${response.daily[i].weather[0].icon}.png">`));
-            card.append($('<p>').text(`Temp: ${response.daily[i].temp.day}\xB0F`));
-            card.append($('<p>').text(`Humidity: ${response.daily[i].humidity}%`));
-            $('#forecast').append(card);
+            //cardDiv and cardSection are Foundation elements to make the cards show properly
+            let cardDiv = $('<div class="cell medium-auto">')
+            let card = $('<div class="card forecast">');
+            cardDiv.append(card)
+            card.append($('<h4 class="card-divider">').text(moment.unix(response.daily[i].dt).format("MM/DD/YYYY")));
+            let cardSection = $('<div class="card-section">')
+            card.append(cardSection)
+            cardSection.append($(`<img src="http://openweathermap.org/img/w/${response.daily[i].weather[0].icon}.png">`));
+            cardSection.append($('<p>').text(`Temp: ${response.daily[i].temp.day}\xB0F`));
+            cardSection.append($('<p>').text(`Humidity: ${response.daily[i].humidity}%`));
+            $('#forecast').append(cardDiv);
         }
     })
 }
@@ -76,12 +80,11 @@ let getCurrent = (cityName) => {
         lon = response.coord.lon;
         let cityTitle = $('<h2>').text(`${cityName} (${moment().format('MM')}/${moment().format('DD')}/${moment().format('YYYY')})`);
         $('#current-weather').append(cityTitle);
-        cityTitle.css('display', 'inline-block')
         let icon = $(`<img src="http://openweathermap.org/img/w/${response.weather[0].icon}.png">`);
         $('#current-weather').append(icon);
-        $('#current-weather').append($('<div>').text(`Temperature: ${response.main.temp} \xB0F`));
-        $('#current-weather').append($('<div>').text(`Humidity: ${response.main.humidity}%`));
-        $('#current-weather').append($('<div>').text(`Wind speed: ${response.wind.speed} MPH`));
+        $('#current-weather').append($('<div class="cell">').text(`Temperature: ${response.main.temp} \xB0F`));
+        $('#current-weather').append($('<div class="cell">').text(`Humidity: ${response.main.humidity}%`));
+        $('#current-weather').append($('<div class="cell">').text(`Wind speed: ${response.wind.speed} MPH`));
         getUv();
         getForecast();    
     })
