@@ -12,7 +12,7 @@ let storedCities = [];
 let renderHistory = () => {
     $('#past-searches').empty();
     storedCities.forEach((value) => {
-        let nameBtn = $(`<button data-name="${value}">`).text(value);
+        let nameBtn = $(`<button class="history" data-name="${value}">`).text(value);
         $('#past-searches').append(nameBtn);
     })
 }
@@ -82,8 +82,8 @@ let getCurrent = (cityName) => {
         $('#current-weather').append($('<div>').text(`Temperature: ${response.main.temp} \xB0F`));
         $('#current-weather').append($('<div>').text(`Humidity: ${response.main.humidity}%`));
         $('#current-weather').append($('<div>').text(`Wind speed: ${response.wind.speed} MPH`));
-        // getUv();
-        // getForecast();    
+        getUv();
+        getForecast();    
     })
 
 }
@@ -108,4 +108,10 @@ $('#search').click((event) => {
     }
 })
 
-//TODO: listen to history buttons too 
+//Listen to history buttons too
+$(document).on("click", ".history", function () {
+    let chosenCity = $(this).attr('data-name')
+    $('#current-weather').empty();
+    $('#forecast').empty();
+    getCurrent(chosenCity);
+})
