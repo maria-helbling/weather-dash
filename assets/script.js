@@ -54,9 +54,9 @@ let getForecast = () => {
         url: urlKey,
         method: 'GET'
     }).then(function (response) {
-        for (i = 1; i < 6; i++) {
+        for (i = 0; i < 5; i++) {
             let card = $('<div>').css('display', 'inline-block');
-            card.append($('<h2>').text('date goes here'));
+            card.append($('<h2>').text(moment.unix(response.daily[i].dt).format("MM/DD/YYYY")));
             card.append($(`<img src="http://openweathermap.org/img/w/${response.daily[i].weather[0].icon}.png">`));
             card.append($('<p>').text(`Temp: ${response.daily[i].temp.day}\xB0F`));
             card.append($('<p>').text(`Humidity: ${response.daily[i].humidity}%`));
@@ -74,7 +74,7 @@ let getCurrent = (cityName) => {
     }).then(function (response) {
         lat = response.coord.lat;
         lon = response.coord.lon;
-        let cityTitle = $('<h2>').text(`${cityName}(${moment().format('MM')}/${moment().format('DD')}/${moment().format('YYYY')})`);
+        let cityTitle = $('<h2>').text(`${cityName} (${moment().format('MM')}/${moment().format('DD')}/${moment().format('YYYY')})`);
         $('#current-weather').append(cityTitle);
         cityTitle.css('display', 'inline-block')
         let icon = $(`<img src="http://openweathermap.org/img/w/${response.weather[0].icon}.png">`);
