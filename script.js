@@ -37,7 +37,7 @@ let noData = () => {
 
 //get UV data
 let getUv = () => {
-    let urlKey = `http://api.openweathermap.org/data/2.5/uvi?appid=19b6b8e66066ceceeddf41a7b1b7f8b3&lat=${lat}&lon=${lon}`
+    let urlKey = `https://api.openweathermap.org/data/2.5/uvi?appid=19b6b8e66066ceceeddf41a7b1b7f8b3&lat=${lat}&lon=${lon}`
     $.ajax({
         url: urlKey,
         method: 'GET'
