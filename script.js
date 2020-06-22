@@ -6,7 +6,7 @@ let uvLevels = ['green', 'green', 'green', 'gold', 'gold', 'gold', 'orange', 'or
 
 //load page with past searches
 let storedCities = [];
-
+let isHistory = false;
 
 //put past searches on the page
 let renderHistory = () => {
@@ -22,10 +22,15 @@ let renderHistory = () => {
 //write new name into local storage
 let storeSearches = (newCity) => {
     //handle if the new city is already in the history
-    if (storedCities.includes(newCity)) {
+    if (isHistory && storedCities.includes(newCity)) {
         storedCities =  storedCities.filter((value) => { return value !== newCity})
     }
-    storedCities.unshift(newCity)
+    if (isHistory) {
+        storedCities.unshift(newCity)
+    } else { 
+        storedCities = [newCity]
+        isHistory = true;
+    }
     renderHistory();
     localStorage.setItem('cityHistory', JSON.stringify(storedCities))
 }
@@ -112,10 +117,13 @@ let getCurrent = (cityName) => {
 
 //render past searches and the last searched city weather info
 storedCities = JSON.parse(localStorage.getItem('cityHistory'))
-if (storedCities.length) {
+if (storedCities) {
+    isHistory = true;
     storedCities = JSON.parse(localStorage.getItem('cityHistory'))
     renderHistory();
     getCurrent(storedCities[0]);
+} else {
+    noData();
 }
 
 // Listen to search button click

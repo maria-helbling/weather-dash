@@ -41,6 +41,11 @@ THEN I am presented with the last searched city forecast
 * [OpenWeather API](https://openweathermap.org/api) is used to retrieve current and forecast weather data for cities. 
 * The dashboard utilises local storage to record search history.
 
+## Future plans
+
+- [] Add info other than weather about your destination
+- [] Clear individual search items
+
 ## Setup
 
 To clone the repo:
